@@ -76,17 +76,6 @@
       color: gray;
     }
 
-    .hero-section {
-      height: 105vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      text-align: center;
-      background-image: url('images/ai-feedback.gif'); /* Hero sectionにGIFを設定 */
-      background-size: cover;
-      background-position: center;
-    }
 
     .hero-section h2 {
       font-size: 5rem;
@@ -142,17 +131,59 @@
       }
     }
 
-    /* Why, What, Howセクションに背景GIF */
+    .hero-section {
+      height: 105vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+      background-image: url('images/ai-feedback.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
     #why {
       background-image: url('images/why-image.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     #what {
       background-image: url('images/ai-feedback.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     #how {
       background-image: url('images/why-image.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* レスポンシブ対応を改善 */
+    @media (max-width: 768px) {
+      .hero-section,
+      #why,
+      #what,
+      #how {
+        background-size: auto 100%;
+        background-position: center center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-section,
+      #why,
+      #what,
+      #how {
+        background-size: auto 100%;
+        background-position: center center;
+      }
     }
 
     .section h2 {
@@ -193,15 +224,16 @@
       padding: 30px 0;
     }
 
-    /* SVGアイコンのスタイリングを更新 */
-    .svg-icon {
+       /* SVGアイコンのスタイリングを更新 */
+       .svg-icon {
       -webkit-mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
       mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
       background-color: #fff;
       mix-blend-mode: difference;
       width: 80%;
-      max-width: 800px;
-      height: 500px;
+      max-width: 600px;
+      height: 0;
+      padding-bottom: 30%; /* アスペクト比を維持 */
       margin: 0 auto 30px;
     }
 
@@ -214,37 +246,34 @@
       height: 100%;
       padding: 20px;
       width: 100%;
+      box-sizing: border-box;
     }
 
-    /* フッターのスタイルを追加 */
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    footer a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* レスポンシブ対応 */
+    /* レスポンシブ対応を改善 */
     @media (max-width: 768px) {
       .svg-icon {
         width: 90%;
-        height: 150px;
+        padding-bottom: 35%; /* モバイルでは少し大きく */
+      }
+      
+      .hero-section h2 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-section p {
+        font-size: 1rem;
+        margin-bottom: 20px;
       }
     }
 
     @media (max-width: 480px) {
       .svg-icon {
         width: 95%;
-        height: 120px;
+        padding-bottom: 40%; /* さらに小さい画面では更に大きく */
+      }
+      
+      .hero-section h2 {
+        font-size: 2rem;
       }
     }
   </style>

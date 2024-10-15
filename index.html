@@ -15,269 +15,200 @@
   <meta property="og:image" content="https://dokuturutake.github.io/SuccessBless/images/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <style>
-    /* 文字にフィルタを追加 */
-    .hero-section h2, 
-    .hero-section p, 
-    .section h2, 
-    .section p {
-      color: white;
-      mix-blend-mode: difference; /* MixBlendModeを適用 */
-    }
+ body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: black;
+  color: white;
+  overflow-x: hidden;
+}
 
-    /* 背景の色に透明度を追加（オプション） */
-    .section {
-      background-color: rgba(0, 0, 0, 0.7); /* 背景色を少し透明に */
-    }
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  mix-blend-mode: difference;
+}
 
-    /* ボタンのテキストに影 */
-    .button {
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
-    }
+.header.hidden {
+  opacity: 0;
+}
 
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: black;
-      color: white;
-      overflow-x: hidden;
-    }
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
 
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1; /* スタッキングコンテキストを避けるために低い値 */
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-      mix-blend-mode: difference;
-    }
+.nav a {
+  color: white;
+  text-decoration: none;
+}
 
-    .header.hidden {
-      opacity: 0;
-    }
+.nav a:hover {
+  color: gray;
+}
 
-    .nav ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-    }
+.hero-section, .section {
+  min-height: 110vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-    .nav a {
-      color: white;
-      text-decoration: none;
-    }
+.hero-section {
+  height: 105vh;
+  text-align: center;
+  background-image: url('images/ai-feedback.gif');
+}
 
-    .nav a:hover {
-      color: gray;
-    }
+#why, #how {
+  background-image: url('images/why-image.gif');
+}
 
+#what {
+  background-image: url('images/ai-feedback.gif');
+}
 
-    .hero-section h2 {
-      font-size: 5rem;
-    }
+.hero-section h2, 
+.hero-section p, 
+.section h2, 
+.section p {
+  color: white;
+  mix-blend-mode: difference;
+}
 
-    .hero-section p {
-      font-size: 1.5rem;
-    }
+.hero-section h2 {
+  font-size: 5rem;
+}
 
-    .button {
-      background-color: white;
-      color: black;
-      padding: 15px 30px;
-      border-radius: 30px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+.hero-section p {
+  font-size: 1.5rem;
+}
 
-    .button:hover {
-      background-color: gray;
-    }
+.section h2 {
+  font-size: 3rem;
+}
 
-    .section {
-      min-height: 110vh; /* 画面より少し大きく */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 50px 20px;
-    }
+.section p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
 
-    @media (max-width: 768px) {
-      .hero-section h2 {
-        font-size: 3rem;
-      }
+.button {
+  background-color: white;
+  color: black;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
 
-      .hero-section p {
-        font-size: 1rem;
-      }
+.button:hover {
+  background-color: gray;
+}
 
-      .section h2 {
-        font-size: 2rem;
-      }
+.fade-in-left, .fade-in-right {
+  opacity: 0;
+  transition: opacity 0.8s, transform 0.8s;
+}
 
-      .section p {
-        font-size: 1rem;
-      }
+.fade-in-left {
+  transform: translateX(-100px);
+}
 
-      .button {
-        padding: 10px 20px;
-        font-size: 1rem;
-      }
-    }
+.fade-in-right {
+  transform: translateX(100px);
+}
 
-    .hero-section {
-      height: 105vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      text-align: center;
-      background-image: url('images/ai-feedback.gif');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+.fade-in-left.visible, .fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-    #why {
-      background-image: url('images/why-image.gif');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+footer {
+  background-color: #333;
+  text-align: center;
+  padding: 30px 0;
+}
 
-    #what {
-      background-image: url('images/ai-feedback.gif');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+.svg-icon {
+  -webkit-mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
+  mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
+  background-color: #fff;
+  mix-blend-mode: difference;
+  width: 80%;
+  max-width: 600px;
+  height: 0;
+  padding-bottom: 30%;
+  margin: 0 auto 30px;
+}
 
-    #how {
-      background-image: url('images/why-image.gif');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-    /* レスポンシブ対応を改善 */
-    @media (max-width: 768px) {
-      .hero-section,
-      #why,
-      #what,
-      #how {
-        background-size: auto 100%;
-        background-position: center center;
-      }
-    }
+@media (max-width: 768px) {
+  .hero-section h2 {
+    font-size: 3rem;
+  }
 
-    @media (max-width: 480px) {
-      .hero-section,
-      #why,
-      #what,
-      #how {
-        background-size: auto 100%;
-        background-position: center center;
-      }
-    }
+  .hero-section p, .section p {
+    font-size: 1rem;
+  }
 
-    .section h2 {
-      font-size: 3rem;
-    }
+  .section h2 {
+    font-size: 2rem;
+  }
 
-    .section p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-    }
+  .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
 
-    /* スライドインアニメーション */
-    .fade-in-left {
-      opacity: 0;
-      transform: translateX(-100px);
-      transition: opacity 0.8s, transform 0.8s;
-    }
+  .hero-section, .section {
+    background-size: auto 100%;
+    background-position: center center;
+  }
 
-    .fade-in-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  .svg-icon {
+    width: 90%;
+    padding-bottom: 35%;
+  }
+}
 
-    .fade-in-right {
-      opacity: 0;
-      transform: translateX(100px);
-      transition: opacity 0.8s, transform 0.8s;
-    }
+@media (max-width: 480px) {
+  .hero-section h2 {
+    font-size: 2rem;
+  }
 
-    .fade-in-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    footer {
-      background-color: #333;
-      text-align: center;
-      padding: 30px 0;
-    }
-
-       /* SVGアイコンのスタイリングを更新 */
-       .svg-icon {
-      -webkit-mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
-      mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
-      background-color: #fff;
-      mix-blend-mode: difference;
-      width: 80%;
-      max-width: 600px;
-      height: 0;
-      padding-bottom: 30%; /* アスペクト比を維持 */
-      margin: 0 auto 30px;
-    }
-
-    /* Hero Sectionのレイアウトを調整 */
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    /* レスポンシブ対応を改善 */
-    @media (max-width: 768px) {
-      .svg-icon {
-        width: 90%;
-        padding-bottom: 35%; /* モバイルでは少し大きく */
-      }
-      
-      .hero-section h2 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-section p {
-        font-size: 1rem;
-        margin-bottom: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .svg-icon {
-        width: 95%;
-        padding-bottom: 40%; /* さらに小さい画面では更に大きく */
-      }
-      
-      .hero-section h2 {
-        font-size: 2rem;
-      }
-    }
-  </style>
-
+  .svg-icon {
+    width: 95%;
+    padding-bottom: 40%;
+  }
+}
   </style>
 </head>
 <body>
@@ -421,3 +352,4 @@ window.addEventListener('scroll', () => {
   </script>
 </body>
 </html>
+

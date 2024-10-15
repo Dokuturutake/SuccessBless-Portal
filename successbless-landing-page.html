@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUCCESSBLESS - AIがあなたを応援する目標達成サポートSNS</title>
+  <meta name="description" content="SUCCESSBLESSは、AIのフィードバックとSNSの楽しさを組み合わせた革新的な目標達成サポートプラットフォームです。楽しみながら成長し、夢を叶えましょう。">
+  <meta name="keywords" content="SUCCESSBLESS, 目標達成, AI, SNS, モチベーション, 自己成長">
+  <meta name="author" content="SUCCESSBLESS Team">
+  <link rel="canonical" href="https://dokuturutake.github.io/SuccessBless/">
+  <meta property="og:title" content="SUCCESSBLESS - AIがあなたを応援する目標達成サポートSNS">
+  <meta property="og:description" content="SUCCESSBLESSは、AIのフィードバックとSNSの楽しさを組み合わせた革新的な目標達成サポートプラットフォームです。楽しみながら成長し、夢を叶えましょう。">
+  <meta property="og:url" content="https://dokuturutake.github.io/SuccessBless/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://dokuturutake.github.io/SuccessBless/images/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    /* 文字にフィルタを追加 */
+    .hero-section h2, 
+    .hero-section p, 
+    .section h2, 
+    .section p {
+      color: white;
+      mix-blend-mode: difference; /* MixBlendModeを適用 */
+    }
+
+    /* 背景の色に透明度を追加（オプション） */
+    .section {
+      background-color: rgba(0, 0, 0, 0.7); /* 背景色を少し透明に */
+    }
+
+    /* ボタンのテキストに影 */
+    .button {
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1; /* スタッキングコンテキストを避けるために低い値 */
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      mix-blend-mode: difference;
+    }
+
+    .header.hidden {
+      opacity: 0;
+    }
+
+    .nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      color: gray;
+    }
+
+    .hero-section {
+      height: 105vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+      background-image: url('images/ai-feedback.gif'); /* Hero sectionにGIFを設定 */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-section h2 {
+      font-size: 5rem;
+    }
+
+    .hero-section p {
+      font-size: 1.5rem;
+    }
+
+    .button {
+      background-color: white;
+      color: black;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: gray;
+    }
+
+    .section {
+      min-height: 110vh; /* 画面より少し大きく */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h2 {
+        font-size: 3rem;
+      }
+
+      .hero-section p {
+        font-size: 1rem;
+      }
+
+      .section h2 {
+        font-size: 2rem;
+      }
+
+      .section p {
+        font-size: 1rem;
+      }
+
+      .button {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Why, What, Howセクションに背景GIF */
+    #why {
+      background-image: url('images/why-image.gif');
+    }
+
+    #what {
+      background-image: url('images/ai-feedback.gif');
+    }
+
+    #how {
+      background-image: url('images/why-image.gif');
+    }
+
+    .section h2 {
+      font-size: 3rem;
+    }
+
+    .section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    /* スライドインアニメーション */
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    footer {
+      background-color: #333;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    /* SVGアイコンのスタイリングを更新 */
+    .svg-icon {
+      -webkit-mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
+      mask: url(images/SuccessBlessIconAndString.svg) no-repeat center / contain;
+      background-color: #fff;
+      mix-blend-mode: difference;
+      width: 80%;
+      max-width: 800px;
+      height: 500px;
+      margin: 0 auto 30px;
+    }
+
+    /* Hero Sectionのレイアウトを調整 */
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 20px;
+      width: 100%;
+    }
+
+    /* フッターのスタイルを追加 */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      .svg-icon {
+        width: 90%;
+        height: 150px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .svg-icon {
+        width: 95%;
+        height: 120px;
+      }
+    }
+  </style>
+
+  </style>
+</head>
+<body>
+  <header class="header" id="header">
+    <h1 class="logo"> </h1>
+    <nav class="nav">
+      <ul>
+        <li><a href="#why">Why</a></li>
+        <li><a href="#what">What</a></li>
+        <li><a href="#how">How</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content" id="hero-content">
+        <div class="svg-icon"></div>
+        <p>AIがあなたを応援する目標達成サポートSNS</p>
+        <a href="https://dokuturutake.github.io/SuccessBless/">
+          <button class="button">今すぐ始める</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Why Section -->
+    <section class="section" id="why">
+      <div class="" id="why-content">
+        <h2>Why SUCCESSBLESS?</h2>
+        <p>
+          SUCCESSBLESSは、SNSの楽しいインタラクションとAIのフィードバックを組み合わせて、あなたの目標達成をサポートします。SNSの中毒性を活かしながら、楽しみつつ成長できます。
+        </p>
+      </div>
+    </section>
+
+    <!-- What Section -->
+    <section class="section" id="what">
+      <div class="" id="what-content">
+        <h2>What We Offer</h2>
+        <p>
+          SUCCESSBLESSでは、投稿に対してAIがフィードバックを提供し、モチベーションを維持できます。また、他のユーザーとのインタラクションを楽しみながら、日々の目標をゲーム感覚で進めることができます。
+        </p>
+      </div>
+    </section>
+
+    <!-- How Section -->
+    <section class="section" id="how">
+      <div class="" id="how-content">
+        <h2>How It Works</h2>
+        <p>
+          シンプルで直感的な操作感のWebアプリ。広告もなく、無料で利用でき、日々の目標達成をサポートします。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <section class="section">
+        <p>&copy; 2024 SUCCESSBLESS. All rights reserved.</p>
+          <p>
+      <a href="https://github.com/dokuturutake/SuccessBless" target="_blank" rel="noopener noreferrer">
+        GitHub Repository
+      </a>
+    </p>
+    </section>
+  </footer>
+
+  <script>
+    // Intersection Observer for section fade-in effects
+    const sections = document.querySelectorAll('.fade-in-left, .fade-in-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Header fade on scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+    });
+
+    // セクションのリンクがクリックされたときに、中央にスクロールさせる
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'  // セクションが画面の中央に来るように
+        });
+    });
+    });
+
+    // セクション要素を取得
+
+// スクロール時に最も近いセクションを中央に移動
+let isScrolling = false;
+
+window.addEventListener('scroll', () => {
+  if (!isScrolling) {
+    window.requestAnimationFrame(() => {
+      let closestSection = null;
+      let closestDistance = Infinity;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top - window.innerHeight / 2);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSection = section;
+        }
+      });
+
+      // 最も近いセクションを中央にスクロール
+      if (closestSection) {
+        closestSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+
+      isScrolling = false;
+    });
+    isScrolling = true;
+  }
+});
+
+
+  </script>
+</body>
+</html>
